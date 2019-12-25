@@ -5,7 +5,6 @@ import { globalStyles } from '../styles/global'
 export default function Home({ navigation }) {
   const [reviews, setReviews] = useState([
     { title: 'Zelda, breath of fresh air', rating: '5', body: 'lorem ipsum', key: '1' },
-    {title: 'Gotta catch them all again', rating: '4', body: 'lorem ipsum', key:'2'},
     { title: 'Not so final fantasy', rating: '5', body: 'lorem ipsum', key: '3'}
   ])
   return (
