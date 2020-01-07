@@ -7,7 +7,8 @@ export default function Home({ navigation }) {
   const [reviews, setReviews] = useState([
     { title: 'Zelda, breath of fresh air', rating: '5', body: 'lorem ipsum', key: '1' },
     { title: 'Gotta Catch them all', rating: '3', body: 'lorem ipsum', key: '2' },
-    { title: 'Not so final fantasy', rating: '1', body: 'lorem ipsum', key: '3'}
+    { title: 'Not so final fantasy', rating: '1', body: 'lorem ipsum', key: '3' },
+    { title: 'Avengers', rating: '4', body: 'lorem ipsum', key: '4'}
   ])
   return (
     <View style={globalStyles.container}>
