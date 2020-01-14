@@ -3,14 +3,14 @@ import { StyleSheet, View, Text, TouchableOpacity, FlatList, Modal } from 'react
 import { MaterialIcons } from '@expo/vector-icons'
 import { globalStyles } from '../styles/global'
 import Card from '../shared/card'
-
+import ReviewForm from '../screens/reviewForm'
 export default function Home({ navigation }) {
   const [modalOpen, setModalOpt] = useState(false)
   const [reviews, setReviews] = useState([
     { title: 'Zelda, breath of fresh air', rating: '5', body: 'lorem ipsum', key: '1' },
     { title: 'Gotta Catch them all', rating: '3', body: 'lorem ipsum', key: '2' },
     { title: 'Not so final fantasy', rating: '1', body: 'lorem ipsum', key: '3' },
-    { title: 'Avengers', rating: '4', body: 'lorem ipsum', key: '4'}
+    { title: 'Avengers', rating: '4', body: 'lorem ipsum', key: '4' }
   ])
   return (
     <View style={globalStyles.container}>
@@ -21,22 +21,20 @@ export default function Home({ navigation }) {
           style={styles.modalToggle}
           onPress={() => setModalOpt(false)}
         />
-        <View>
-          <Text>Hello from modal</Text>
-        </View>
+        <ReviewForm />
       </Modal>
       <MaterialIcons
         name='add'
         size={24}
-        style={{...styles.modalToggle, ...styles.modalClose}}
+        style={{ ...styles.modalToggle, ...styles.modalClose }}
         onPress={() => setModalOpt(true)}
       />
       <FlatList
         data={reviews}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <TouchableOpacity onPress={() => navigation.navigate('ReviewDetails', item)}>
             <Card>
-            <Text style={globalStyles.titleText}>{ item.title }</Text>
+              <Text style={globalStyles.titleText}>{item.title}</Text>
             </Card>
           </TouchableOpacity>
         )}
@@ -52,13 +50,14 @@ const styles = StyleSheet.create({
     borderColor: '#f2f2f2',
     padding: 10,
     borderRadius: 10,
-    alignSelf: 'center' 
+    alignSelf: 'center'
   },
   modalClose: {
     marginTop: 20,
     marginBottom: 0
   },
   modalContent: {
-    flex: 1
+    flex: 1,
+    flexDirection: 'column'
   }
 })
