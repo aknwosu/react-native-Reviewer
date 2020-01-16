@@ -1,33 +1,44 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, FlatList, Modal } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, TouchableWithoutFeedback, Keyboard, FlatList, Modal } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import { globalStyles } from '../styles/global'
 import Card from '../shared/card'
 import ReviewForm from '../screens/reviewForm'
 export default function Home({ navigation }) {
-  const [modalOpen, setModalOpt] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
   const [reviews, setReviews] = useState([
     { title: 'Zelda, breath of fresh air', rating: '5', body: 'lorem ipsum', key: '1' },
     { title: 'Gotta Catch them all', rating: '3', body: 'lorem ipsum', key: '2' },
     { title: 'Not so final fantasy', rating: '1', body: 'lorem ipsum', key: '3' },
     { title: 'Avengers', rating: '4', body: 'lorem ipsum', key: '4' }
   ])
+  const addReview = (review) => {
+    review.key = Math.random().toString()
+    setReviews((currentReviews) => {
+      return [review, ...currentReviews]
+    })
+    setModalOpen(false)
+  }
   return (
     <View style={globalStyles.container}>
-      <Modal visible={modalOpen} animationType='slide' style={styles.modalContent}>
-        <MaterialIcons
-          name='close'
-          size={24}
-          style={styles.modalToggle}
-          onPress={() => setModalOpt(false)}
-        />
-        <ReviewForm />
+      <Modal visible={modalOpen} animationType='slide'>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.modalContent}>
+            <MaterialIcons
+              name='close'
+              size={24}
+              style={styles.modalToggle}
+              onPress={() => setModalOpen(false)}
+            />
+            <ReviewForm addReview={addReview} />
+          </View>
+        </TouchableWithoutFeedback>
       </Modal>
       <MaterialIcons
         name='add'
         size={24}
         style={{ ...styles.modalToggle, ...styles.modalClose }}
-        onPress={() => setModalOpt(true)}
+        onPress={() => setModalOpen(true)}
       />
       <FlatList
         data={reviews}
