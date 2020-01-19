@@ -40,7 +40,7 @@ export default function ReviewForm({addReview}) {
             <Text style={globalStyles.errorText}>{props.touched.title && props.errors.title}</Text>
             <TextInput
               style={globalStyles.input}
-              multiline
+              multiline minHeight={120}
               placeholder='Review details'
               onChangeText={props.handleChange('body')}
               value={props.values.body}
